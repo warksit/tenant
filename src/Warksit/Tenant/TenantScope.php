@@ -71,6 +71,7 @@ class TenantScope implements ScopeInterface {
             throw new TenantNotSetError();
 
         \Log::info("Setting {$this->tenant_column} to {$tenant_id} for " . get_class($model));
+
         $model->{$this->tenant_column} = $tenant_id;
 
     }

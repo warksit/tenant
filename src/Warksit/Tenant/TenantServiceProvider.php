@@ -23,21 +23,6 @@ class TenantServiceProvider extends ServiceProvider {
             $tenant = new Tenant();
             return $tenant;
         });
-
-        // Get config loader
-        $loader = $this->app['config']->getLoader();
-
-        // Get environment name
-        $env = $this->app['config']->getEnvironment();
-
-        // Add package namespace with path set base on your requirement
-        $loader->addNamespace('warksit',__DIR__.'/../config/warksit');
-
-        // Load package override config file
-        $configs = $loader->load($env,'config','warksit');
-
-        // Override value
-        $this->app['config']->set('tenant::config',$configs);
 	}
 
 
