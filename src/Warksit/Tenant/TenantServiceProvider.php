@@ -33,8 +33,6 @@ class TenantServiceProvider extends ServiceProvider {
 
         $tenantScope = new TenantScope();
 
-        dd($this->app['config']->get('tenant::models'));
-
         foreach (\Config::get('package::models') as $model) {
             $model::creating(function (Model $model) use ($tenantScope) {
                 \Log::info('Observer added to ' . $model);
