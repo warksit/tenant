@@ -1,0 +1,26 @@
+{
+    "name": "warksit/tenant",
+    "description": "Simple tenant scoping and population on creating",
+    "authors": [
+        {
+            "name": "Andrew Westrope",
+            "email": "andrew@warwickshire.it"
+        }
+    ],
+    "keywords": [
+        "tenant"
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Warksit\\Tenant": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

@@ -1,0 +1,5 @@
+suites:
+  warksit_suite:
+    namespace: Warksit
+    src_path: src
+    spec_prefix: spec
