@@ -17,7 +17,7 @@ class TenantTraitSpec extends ObjectBehavior
     {
         $this->shouldHaveType('spec\Warksit\tenant\Foo');
     }
-    
+
 }
 
 class Foo
