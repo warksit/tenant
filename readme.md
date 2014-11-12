@@ -19,5 +19,3 @@ Publish config and update models and then an observer is set in the ServiceProvi
 
 php artisan config:publish Warksit/tenant
 
-Test webhook
-

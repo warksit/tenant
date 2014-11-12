@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ScopeInterface;
-use Illuminate\Foundation\Application;
 use Warksit\Tenant\Errors\TenantNotSetError;
 
 class TenantScope extends TenantBaseClass implements ScopeInterface {
