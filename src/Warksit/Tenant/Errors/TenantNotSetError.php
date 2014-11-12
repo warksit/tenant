@@ -1,4 +1,4 @@
-<?php  namespace Warksit\Tenants;
+<?php  namespace Warksit\Tenant\Errors;
 
 class TenantNotSetError extends \Exception {
 

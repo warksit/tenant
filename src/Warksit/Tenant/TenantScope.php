@@ -1,18 +1,11 @@
 <?php  namespace Warksit\Tenant;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ScopeInterface;
+use Illuminate\Foundation\Application;
+use Warksit\Tenant\Errors\TenantNotSetError;
 
-class TenantScope implements ScopeInterface {
-    private $tenant_id;
-    private $tenant_column = 'franchise_id';
-
-    function __construct()
-    {
-
-    }
-
+class TenantScope extends TenantBaseClass implements ScopeInterface {
 
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -23,21 +16,12 @@ class TenantScope implements ScopeInterface {
      */
     public function apply(Builder $builder)
     {
+        if($this->disabled) return;
 
-        if(($tenant_id = \Tenant::getTenantId()) === null)
+        if($this->tenant_id  === null)
             throw new TenantNotSetError();
 
-        $this->tenant_id = $tenant_id;
-
-        //Handle special case
-        if($tenant_id==0) return;
-
         $builder->whereRaw("$this->tenant_column = $this->tenant_id");
-
-//        $builder->where(function($query)
-//        {
-//            $query->where($this->tenant_column,$this->tenant_id);
-//        });
 
     }
 
@@ -49,10 +33,9 @@ class TenantScope implements ScopeInterface {
      */
     public function remove(Builder $builder)
     {
-        if(\Tenant::getTenantId()==0) return;
+        if($this->disabled) return;
 
         $query = $builder->getQuery();
-
 
         foreach ((array) $query->wheres as $key => $where)
         {
@@ -63,16 +46,5 @@ class TenantScope implements ScopeInterface {
             }
         }
         $query->wheres = array_values($query->wheres);
-    }
-
-    public function creating(Model $model)
-    {
-        if(($tenant_id = \Tenant::getTenantId()) === null)
-            throw new TenantNotSetError();
-
-        \Log::info("Setting {$this->tenant_column} to {$tenant_id} for " . get_class($model));
-
-        $model->{$this->tenant_column} = $tenant_id;
-
     }
 }

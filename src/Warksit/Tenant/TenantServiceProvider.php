@@ -5,12 +5,19 @@ use \Illuminate\Database\Eloquent\Model;
 
 class TenantServiceProvider extends ServiceProvider {
 
-	/**
+    /**
+     * The array of models to be observed
+     *
+     * @var array
+     */
+    private $modelsToBeObserved;
+
+    /**
 	 * Indicates if loading of the provider is deferred.
 	 *
 	 * @var bool
 	 */
-	protected $defer = false;
+	protected $defer = true;
 
 	/**
 	 * Register the service provider.
@@ -23,20 +30,24 @@ class TenantServiceProvider extends ServiceProvider {
             $tenant = new Tenant();
             return $tenant;
         });
-	}
+        $this->package('Warksit/tenant');
+        $this->modelsToBeObserved = $this->app['config']->get('tenant::models');
+    }
 
 
+    /**
+     * Attach the observer to the models
+     *
+     */
     public function boot()
     {
 
-        $this->package('Warksit/tenant');
+        $tenantObserver = $this->app->make('Warksit\Tenant\TenantObserver');
 
-        $tenantScope = new TenantScope();
-
-        foreach (\Config::get('package::models') as $model) {
-            $model::creating(function (Model $model) use ($tenantScope) {
-                \Log::info('Observer added to ' . $model);
-                $tenantScope->creating($model);
+        foreach ($this->modelsToBeObserved as $modelToBeObserved) {
+            $modelToBeObserved::creating(function (Model $model) use ($tenantObserver) {
+                \Log::info('Observer added to ' . get_class($model));
+                $tenantObserver->creating($model);
             });
         }
     }

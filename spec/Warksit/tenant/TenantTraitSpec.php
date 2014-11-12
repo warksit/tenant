@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Warksit\tenant;
+namespace spec\Warksit\Tenant;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
