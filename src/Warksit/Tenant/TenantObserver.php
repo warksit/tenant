@@ -1,7 +1,6 @@
 <?php namespace Warksit\Tenant;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Application;
 use Warksit\Tenant\Errors\TenantNotSetError;
 
 class TenantObserver extends TenantBaseClass {
@@ -22,6 +21,5 @@ class TenantObserver extends TenantBaseClass {
             throw new TenantNotSetError();
 
         $model->{$this->tenant_column} = $this->tenant_id;
-
     }
 }
