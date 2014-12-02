@@ -39,7 +39,7 @@ class TenantScope extends TenantBaseClass implements ScopeInterface {
 
         foreach ((array) $query->wheres as $key => $where)
         {
-            if (strpos($where['sql'],$this->tenant_column) !== false)
+            if (isset($where['sql']) && strpos($where['sql'],$this->tenant_column) !== false)
             {
 
                 unset($query->wheres[$key]);
