@@ -22,7 +22,7 @@ class TenantScope extends TenantBaseClass implements ScopeInterface {
         if($this->tenant_id  === null)
             throw new TenantNotSetError();
 
-        $builder->whereRaw("$this->tenant_column = $this->tenant_id");
+        $builder->whereRaw("{$builder->getQuery()->from}.$this->tenant_column = $this->tenant_id");
     }
 
     /**
