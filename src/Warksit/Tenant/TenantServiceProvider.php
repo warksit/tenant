@@ -30,7 +30,6 @@ class TenantServiceProvider extends ServiceProvider {
             $tenant = new Tenant();
             return $tenant;
         });
-        $this->package('Warksit/tenant');
         $this->modelsToBeObserved = $this->app['config']->get('tenant::models');
     }
 
