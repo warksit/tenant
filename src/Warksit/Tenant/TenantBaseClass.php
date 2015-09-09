@@ -32,7 +32,7 @@ abstract class TenantBaseClass {
     function __construct(Application $app)
     {
         $tenant = $app['tenant'];
-        $this->tenant_column = $app['config']->get('tenant::column');
+        $this->tenant_column = config('tenant.column');
         $this->tenant_id = $tenant->getTenantId();
         $this->disabled = $tenant->disabled();
         $this->app = $app;

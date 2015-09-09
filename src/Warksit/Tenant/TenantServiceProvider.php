@@ -30,7 +30,7 @@ class TenantServiceProvider extends ServiceProvider {
             $tenant = new Tenant();
             return $tenant;
         });
-        $this->modelsToBeObserved = $this->app['config']->get('tenant::models');
+        $this->modelsToBeObserved = config('tenant.models');
     }
 
     /**
