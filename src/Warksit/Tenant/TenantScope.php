@@ -1,6 +1,7 @@
 <?php  namespace Warksit\Tenant;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ScopeInterface;
 use Warksit\Tenant\Errors\TenantNotSetError;
 
@@ -13,7 +14,7 @@ class TenantScope extends TenantBaseClass implements ScopeInterface {
      * @throws TenantNotSetError
      * @return void
      */
-    public function apply(Builder $builder)
+    public function apply(Builder $builder, Model $model)
     {
         $this->refreshTenant();
 
@@ -31,7 +32,7 @@ class TenantScope extends TenantBaseClass implements ScopeInterface {
      * @param  \Illuminate\Database\Eloquent\Builder $builder
      * @return void
      */
-    public function remove(Builder $builder)
+    public function remove(Builder $builder, Model $model)
     {
         if($this->disabled) return;
 
