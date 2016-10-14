@@ -8,7 +8,6 @@ trait TenantTrait {
     {
         static::addGlobalScope(\App::make('Warksit\Tenant\TenantScope'));
     }
-
     /**
      * Returns a new builder without the tenant scope applied.
      *
