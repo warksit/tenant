@@ -27,6 +27,7 @@ class Tenant {
     public function setTenantId($tenant_id)
     {
         $this->tenant_id = $tenant_id;
+        $this->is_disabled = false;
     }
 
     /**
