@@ -39,6 +39,13 @@ class Tenant {
     }
 
     /**
+     * Disables the tenant scoping/observer
+     */
+    public function enable() {
+        $this->is_disabled = false;
+    }
+
+    /**
      * Retrieves disabled status
      * @return bool
      */
