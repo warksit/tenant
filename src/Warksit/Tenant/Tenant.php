@@ -27,6 +27,7 @@ class Tenant {
     public function setTenantId($tenant_id)
     {
         $this->tenant_id = $tenant_id;
+        $this->is_disabled = false;
     }
 
     /**
@@ -35,6 +36,13 @@ class Tenant {
     public function disable(){
         $this->is_disabled = true;
         $this->tenant_id = null;
+    }
+
+    /**
+     * Disables the tenant scoping/observer
+     */
+    public function enable() {
+        $this->is_disabled = false;
     }
 
     /**
